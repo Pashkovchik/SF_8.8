@@ -6,9 +6,17 @@ import (
 )
 
 func printCharacteristics(p electronic.Phone) {
-	fmt.Println("Бренд телефона:", p.Brand())
-	fmt.Println("Модель телефона:", p.Model())
-	fmt.Println("Тип телефона:", p.Type())
+	pis, _ := p.(electronic.Smartphone)
+	pist, _ := p.(electronic.StationPhone)
+	fmt.Printf("Brand: %q Model: %q Type Of Phone: %q ", p.Brand(), p.Model(), p.Type())
+	switch p.Type() {
+	case "smartphone":
+		fmt.Printf("OS: %q\n", pis.OS())
+	case "station":
+		fmt.Printf("Buttons Count: %d\n", pist.ButtonsCount())
+	default:
+		panic("unknown type of phone")
+	}
 }
 
 func main() {
